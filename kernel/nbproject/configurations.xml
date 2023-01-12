@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="100">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+      <itemPath>includes/kernel/logging.h</itemPath>
+      <itemPath>includes/kernel/arch/x86/x64/mm/page.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <itemPath>sources/de/logging.c</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+    <itemPath>.gitignore</itemPath>
+    <itemPath>configure.sh</itemPath>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="amd64-Debug" type="1">
+      <toolsSet>
+        <compilerSet>GNU_GCC_12.2_AMD64_ELF|MinGW</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>true</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <incDir>
+            <pElem>includes</pElem>
+          </incDir>
+          <commandLine>-ffreestanding -nostdlib -Wall</commandLine>
+          <warningLevel>3</warningLevel>
+        </cTool>
+        <asmTool>
+          <commandlineTool>x86_64-elf-gcc</commandlineTool>
+          <warningLevel>2</warningLevel>
+          <commandLine>-ffreestanding -nostdlib</commandLine>
+        </asmTool>
+        <linkerTool>
+          <commandLine>-ffreestanding -nostdlib -lgcc</commandLine>
+        </linkerTool>
+      </compileType>
+      <item path=".gitignore" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="configure.sh" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="includes/kernel/arch/x86/x64/mm/page.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="includes/kernel/logging.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="sources/de/logging.c" ex="false" tool="0" flavor2="0">
+      </item>
+    </conf>
+    <conf name="amd64-Release" type="1">
+      <toolsSet>
+        <compilerSet>GNU_GCC_12.2_AMD64_ELF|MinGW</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>true</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>6</developmentMode>
+          <incDir>
+            <pElem>includes</pElem>
+          </incDir>
+          <commandLine>-ffreestanding -nostdlib -Wall</commandLine>
+          <warningLevel>3</warningLevel>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+          <commandlineTool>x86_64-elf-gcc</commandlineTool>
+          <warningLevel>2</warningLevel>
+          <commandLine>-ffreestanding -nostdlib</commandLine>
+        </asmTool>
+        <linkerTool>
+          <commandLine>-ffreestanding -nostdlib -lgcc</commandLine>
+        </linkerTool>
+      </compileType>
+      <item path=".gitignore" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="configure.sh" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="includes/kernel/arch/x86/x64/mm/page.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="includes/kernel/logging.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="sources/de/logging.c" ex="false" tool="0" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>

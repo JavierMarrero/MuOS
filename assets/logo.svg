@@ -8,9 +8,9 @@
    version="1.1"
    id="svg5"
    sodipodi:docname="logo.svg"
-   inkscape:export-filename="D:\Workspace\MuOS\assets\logo_64x64_white.png"
-   inkscape:export-xdpi="34.133335"
-   inkscape:export-ydpi="34.133335"
+   inkscape:export-filename="D:\Workspace\MuOS\assets\logo_64x64_color.png"
+   inkscape:export-xdpi="76.800003"
+   inkscape:export-ydpi="76.800003"
    inkscape:version="1.1 (c68e22c387, 2021-05-23)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -67,7 +67,7 @@
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect5541);fill:#3771c8;fill-opacity:1;stroke:none"><tspan
          x="6.6816406"
          y="44.846728"
-         id="tspan18316">μOS</tspan></text>
+         id="tspan18332">μOS</tspan></text>
     <path
        id="path4239"
        style="color:#000000;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;isolation:auto;color-interpolation:sRGB;color-interpolation-filters:linearRGB;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#dbdee3;stroke-width:0.71569792;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;marker-start:none;marker-mid:none;marker-end:none;paint-order:normal;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate"
