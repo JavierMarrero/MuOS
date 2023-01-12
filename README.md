@@ -7,7 +7,7 @@
 # μOS :computer::cuba:
 > General purpose POSIX compatible operating system based on the ideas of Jochen Liedtke and the L4 microkernel family
 
-![](assets/logo_64x64_white.png)
+![](assets/logo_64x64_color.png)
 
 Welcome to the MuOS project repository. MuOS *-also stylized, and rather preferred, μOS-* is a general purpose **POSIX** compliant operating systems designed for portability,
 security, efficiency and a high degree of decomposition between components. μOS is *free sofware*, meaning that you are free to toy with the system and learn from it. The
