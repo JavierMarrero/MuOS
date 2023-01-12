@@ -31,39 +31,85 @@ extern "C"
 
 // C
 #include <limits.h>
+#include <stdarg.h>
 #include <stdbool.h>
+#include <stddef.h>
 
+// KERNEL
+#include <kernel/config.h>
+
+#define ML_MAX_LOGGING_OUTPUTS  4
+
+/**
+ * This is a function pointer that acts as an output function for the log messages.
+ */
 typedef void (*ml_logger_print_function)(const char* str);
 
+// =========================================
+//          Log output functions
+// =========================================
+void ml_logger_uart_output(const char* str);
+
+/**
+ * This enumeration type holds all the possible values for the log messages.
+ */
 typedef enum ml_log_level
 {
-    ALL = -1,
-    DEBUG,
-    TRACE,
-    INFO,
-    WARNING,
-    ERROR,
-    OFF = INT_MAX
+    L_ALL = -1,
+    L_DEBUG,
+    L_TRACE,
+    L_INFO,
+    L_WARNING,
+    L_ERROR,
+    L_OFF = INT_MAX
 } ml_log_level_t;
 
+/**
+ * Objects of this type handle debug logging. Using an object explicitly allows for easily discriminating by level and
+ * filter log messages for different routines. There's a global logging object just in case you don't want to initialize
+ * your own logging object. Notice how all the logging functions only have effect if the appropriate configuration macro
+ * is enabled.
+ * <p>
+ * The function pointers should point to any of the debug output functions. By default, the first of these points to the
+ * UART serial output. There are 4 slots for debugging functions, in case alternative output methods are used.
+ * <p>
+ * The structure is designed to be instantiated on the stack. Please, do not use the heap for initializing logging
+ * objects, is a waste of time and space. The object itself is about 48 bytes long. This is why we don't provide a
+ * 'new' operator function.
+ * <p>
+ * You may use the C default initialization array syntax to initialize this structure. Just be sure to initialize
+ * correctly all the fields. If a <code>m_writers</code> field is not <code>NULL</code> but also ain't no valid
+ * pointer, a page fault will arise. <b>All the writers must be NULL if they don't point to a valid memory location</b>.
+ * One may find easier to use the initialization function instead.
+ *
+ * @author J. Marrero
+ */
 typedef struct ml_logger
 {
     const char*     m_name;
     ml_log_level_t  m_level;
+
+    ml_logger_print_function m_writers[ML_MAX_LOGGING_OUTPUTS];
 } ml_logger_t;
 
-ml_logger_t* ml_logger_init(ml_logger_t* self, const char* name, ml_log_level_t level);
+ml_logger_t     ml_logger_init(const char* name, ml_log_level_t level);  /// Initializes the objects
+
+bool ml_logger_is_loggable(const ml_logger_t* restrict self, ml_log_level_t level); /// Can a logger log messages of this level?
+void ml_logger_log_(const ml_logger_t* self, ml_log_level_t level, const char* file, const char* func, const int line, const char* fmt, ...); /// Log a message
 
 /**
- * Returns true if the given logger will dispatch messages with the provided level or higher.
+ * Log function. The parameters are:
  *
- * @param self
- * @param level
- * @return
+ * @param l the logger instance
+ * @param lv the level of the message
+ * @param fmt the format of the string (printf-like)
  */
-bool ml_logger_is_loggable(const ml_logger_t* restrict self, ml_log_level_t level);
+#define ml_logger_log(l, lv, ...)  ml_logger_log_(l, lv, __FILE__, __func__, __LINE__, __VA_ARGS__)
 
-void ml_logger_log(const ml_logger_t* self, ml_log_level_t level, const char* fmt, ...);
+// ====================
+// Static methods
+// ====================
+const ml_logger_t* ml_get_global_logger();
 
 #ifdef __cplusplus
 }

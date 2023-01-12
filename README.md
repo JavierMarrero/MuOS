@@ -59,7 +59,7 @@ QEMU source mirror hosted on GitHub.
 ## Credits
 
 The following list contains all the contributors to the project. Feel free to add yourself to the list of contributors if you did some cool change, but please,
-keep the list alphabetically sorted so it gets easy to look for names. The following block describes what does all the letters means:
+keep the list alphabetically sorted so it gets easy to look for names. The following block describes what all the letters mean:
 
 > **C**: country  
 > **E**: e-mail     
@@ -80,7 +80,7 @@ keep the list alphabetically sorted so it gets easy to look for names. The follo
 
 μOS is, and **always will be** free software. The system as a whole is licensed under the **GNU-GPL** version 3. There are several other components licensed under less
 restrictive license agreements but they are all compatible with the GNU-GPL. This will ensure the total freedom from the users of the system. Take a look at our license
-[here](LICENSE.md).
+[here](LICENSE).
 
 <a name="contributing" />
 

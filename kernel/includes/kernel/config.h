@@ -8,5 +8,11 @@
 // However, to suit your specific needs you may need to perform the process at least once.
 // This script is automatically called with its default values by NetBeans when building the project.
 //
+#ifndef __MEL_KERNEL_CONFIGURATION_H__
+#define __MEL_KERNEL_CONFIGURATION_H__
 
-#define MEL_KERNEL_CONFIG_DEBUG 0
+#define MEL_KERNEL_CONFIG_DEBUG         1
+
+#define MEL_KERNEL_CONFIG_ANSI_ESCAPES  1
+
+#endif
