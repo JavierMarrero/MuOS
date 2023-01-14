@@ -43,17 +43,17 @@ extern "C"
 /**
  * This is a function pointer that acts as an output function for the log messages.
  */
-typedef void (*muOS_logger_print_function)(const char* str);
+typedef void (*muOS_LoggerPrintFunctionType)(const char* str);
 
 // =========================================
 //          Log output functions
 // =========================================
-void muOS_logger_uart_output(const char* str);
+void muOS_LoggerUartOutput(const char* str);
 
 /**
  * This enumeration type holds all the possible values for the log messages.
  */
-typedef enum muOS_log_level
+typedef enum muOS_LogLevel
 {
     L_ALL = -1,
     L_DEBUG,
@@ -62,7 +62,7 @@ typedef enum muOS_log_level
     L_WARNING,
     L_ERROR,
     L_OFF = INT_MAX
-} muOS_log_level_t;
+} muOS_LogLevel_t;
 
 /**
  * Objects of this type handle debug logging. Using an object explicitly allows for easily discriminating by level and
@@ -84,18 +84,18 @@ typedef enum muOS_log_level
  *
  * @author J. Marrero
  */
-typedef struct muOS_logger
+typedef struct muOS_Logger
 {
     const char*         m_name;
-    muOS_log_level_t    m_level;
+    muOS_LogLevel_t       m_level;
 
-    muOS_logger_print_function m_writers[ML_MAX_LOGGING_OUTPUTS];
-} muOS_logger_t;
+    muOS_LoggerPrintFunctionType m_writers[ML_MAX_LOGGING_OUTPUTS];
+} muOS_Logger_t;
 
-muOS_logger_t     muOS_logger_init(const char* name, muOS_log_level_t level);  /// Initializes the objects
+muOS_Logger_t   muOS_Logger_Init(const char* name, muOS_LogLevel_t level);  /// Initializes the objects
 
-bool muOS_logger_is_loggable(const muOS_logger_t* restrict self, muOS_log_level_t level); /// Can a logger log messages of this level?
-void muOS_logger_log_(const muOS_logger_t* self, muOS_log_level_t level, const char* file, const char* func, const int line, const char* fmt, ...); /// Log a message
+bool muOS_Logger_IsLoggable(const muOS_Logger_t* restrict self, muOS_LogLevel_t level); /// Can a logger log messages of this level?
+void muOS_Logger_Log_(const muOS_Logger_t* self, muOS_LogLevel_t level, const char* file, const char* func, const int line, const char* fmt, ...); /// Log a message
 
 /**
  * Log function. The parameters are:
@@ -104,12 +104,12 @@ void muOS_logger_log_(const muOS_logger_t* self, muOS_log_level_t level, const c
  * @param lv the level of the message
  * @param fmt the format of the string (printf-like)
  */
-#define muOS_logger_log(l, lv, ...)  muOS_logger_log_(l, lv, __FILE__, __func__, __LINE__, __VA_ARGS__)
+#define muOS_Logger_Log(l, lv, ...)  muOS_Logger_Log_(l, lv, __FILE__, __func__, __LINE__, __VA_ARGS__)
 
 // ====================
 // Static methods
 // ====================
-const muOS_logger_t* ml_get_global_logger();
+const muOS_Logger_t* muOS_GetGlobalLogger();
 
 #ifdef __cplusplus
 }

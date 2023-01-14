@@ -14,16 +14,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+.file "pagetables.S"
+.section .bss, "aw", @nobits
+.align 0x1000
 
-#include <kernel/logging.h>
+#define PAGING_STRUCTURE(name)  \
+    .global name; \
+    name
 
-// C
-#include <stdint.h>
 
-void _main64(void* mboot, uint32_t loader_magic)
-{
-    const muOS_Logger_t* logger = muOS_GetGlobalLogger();
-    muOS_Logger_Log(logger, L_INFO, "initializing kernel for x86-64 architecture.");
 
-    
-}
+

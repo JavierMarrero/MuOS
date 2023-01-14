@@ -14,16 +14,28 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+.file "print.S"
+.section KTEXT32, "ax", @progbits
+.align 4
+.code32
 
-#include <kernel/logging.h>
+#include <kernel/arch/asm.h>
 
-// C
-#include <stdint.h>
+FUNCTION(_puts32):
+    pusha
 
-void _main64(void* mboot, uint32_t loader_magic)
-{
-    const muOS_Logger_t* logger = muOS_GetGlobalLogger();
-    muOS_Logger_Log(logger, L_INFO, "initializing kernel for x86-64 architecture.");
+1:
+    lodsb               // Character to %al
 
-    
-}
+    orb     %al, %al
+    jz      .done
+
+    mov     $0x3F8, %dx
+    outb    %al, %dx
+
+    jmp 1b
+
+.done:
+    popa
+    ret
+

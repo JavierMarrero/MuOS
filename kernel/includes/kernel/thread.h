@@ -41,11 +41,11 @@ typedef uint16_t tid_t;
 /**
  * The thread control block structure holds all the information related to threads.
  */
-typedef struct muOS_tcb
+typedef struct muOS_ThreadControlBlock
 {
     uintptr_t   m_stack;    /// The stack address
     tid_t       m_tid;      /// The thread ID
-} muOS_tcb_t;
+} muOS_ThreadControlBlock_t;
 
 #ifdef __cplusplus
 }

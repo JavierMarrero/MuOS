@@ -14,16 +14,36 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+.file "start.S"
+.section KTEXT32, "ax", @progbits
+.align 4
+.code32
 
-#include <kernel/logging.h>
+#include <kernel/arch/asm.h>
 
-// C
-#include <stdint.h>
+.macro print msg
+    movl    \msg, %esi
+    call    _puts32
+.endm
 
-void _main64(void* mboot, uint32_t loader_magic)
-{
-    const muOS_Logger_t* logger = muOS_GetGlobalLogger();
-    muOS_Logger_Log(logger, L_INFO, "initializing kernel for x86-64 architecture.");
+FUNCTION(multiboot_entry_point):
 
-    
-}
+    // Set up the initial stack
+    movl    $stack32_top, %esp
+
+    // Print the initial status
+    print   $status_begin
+
+    // Halt the kernel. Reaching this statement indicates a boot failure.
+    // So, we probably would have to print an error message.
+.epilogue:
+    hlt
+    jmp .epilogue
+
+// ==================
+//      MESSAGES
+// ==================
+
+err_no_cpuid: .string "Error: Hardware does not supports CPUID instruction."
+
+status_begin: .string "[x86_64] Loading kernel..."

@@ -32,11 +32,23 @@ extern "C"
 // ==== Paging constants ====
 #define PAGE_SIZE   0x1000u     /// The size of a page
 
-struct muOS_x86_64_pdtp
+struct muOS_x86_64_PageMapLevel4Entry
 {
-    
+    unsigned    m_present : 1;
+    unsigned    m_writeable : 1;
+    unsigned    m_user : 1;
+    unsigned    m_writethrough : 1;
+    unsigned    m_cache_disabled : 1;
+    unsigned    m_accessed : 1;
+    unsigned    : 1;
+    unsigned    m_size : 1;
+    unsigned    : 4;
+    unsigned    m_page_ppm : 28;
+    unsigned    m_reserved : 12;
+    unsigned    : 11;
+    unsigned    m_cache_disabled : 1;
 } __attribute__((packed));
-typedef struct muOS_x86_64_pdtp muOS_x86_64_pdpt_t;
+typedef struct muOS_x86_64_PageMapLevel4Entry muOS_x86_64_PageMapLevel4Entry_t;
 
 #ifdef __cplusplus
 }

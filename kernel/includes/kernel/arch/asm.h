@@ -15,15 +15,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <kernel/logging.h>
+/* 
+ * File:   asm.h
+ * Author: Javier Marrero
+ *
+ * Created on January 14, 2023, 1:33 AM
+ */
 
-// C
-#include <stdint.h>
+#ifndef ASM_H
+#define ASM_H
 
-void _main64(void* mboot, uint32_t loader_magic)
-{
-    const muOS_Logger_t* logger = muOS_GetGlobalLogger();
-    muOS_Logger_Log(logger, L_INFO, "initializing kernel for x86-64 architecture.");
+#define GLOBAL_SYMBOL(x)    .global x; x
+#define FUNCTION(x)         .global x; .type x, @function; x
 
-    
-}
+#endif /* ASM_H */
+

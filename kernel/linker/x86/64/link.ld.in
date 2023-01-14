@@ -1,4 +1,102 @@
+/*
+ * Copyright (C) 2023 Javier Marrero
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * AMD64 LINKER SCRIPT
+ *
+ * THIS LINKER SCRIPT IS DESIGNED TO WORK WITH GNU-GCC. IT DISPLAYS THE SECTION LAYOUT OF THE EXECUTABLE AND THE
+ * LOCATION OF THOSE SECTIONS IN MEMORY. THIS FILE GENERATES THE ACTUAL LINKER SCRIPT, AS THIS IS DESIGNED TO
+ * PASSED TO THE C PREPROCESSOR FOR LINKER SCRIPT PREPARATION. ALL CHANGES MUST BE PERFORMED HERE NOT IN THE
+ * GENERATED FILE.
+ */
+
+#include <kernel/arch/x86/64/mm/globals.h>
+#include <kernel/arch/x86/64/boot.h>
+
 SECTIONS
 {
+    kernel_load_address = PA2VA(BOOT_OFFSET);
+
+    .unmapped (BOOT_OFFSET + SIZEOF_HEADERS) : AT(BOOT_OFFSET + SIZEOF_HEADERS)
+    {
+        unmapped_start = .;
+
+        /* ==== Boot-loader sections ==== */
+        *(MULTIBOOT_HEADER);
+        *(KTEXT32);
+        *(KDATA32);
+        *(KBSS32);
+
+        unmapped_end = .;
+    }
+
+    .mapped (PA2VA(BOOT_OFFSET) + SIZEOF_HEADERS + SIZEOF(.unmapped)) : AT(BOOT_OFFSET + SIZEOF_HEADERS + SIZEOF(.unmapped))
+    {
+        /* ==== Read-Only Sections ==== */
+        . = ALIGN(4K);
+        mapped_ro_lo = .;
+
+        *(.text .text.*);
+        *(.rodata .rodata.*);
+
+        mapped_ro_hi = .;
+
+        /* ==== Read/Write Sections ==== */
+        . = ALIGN(4K);
+        mapped_rw_lo = .;
+
+        *(.data .data.*);
+        *(COMMON);
+        *(.bss .bss.*);
+        *(.heap);
+
+        mapped_rw_hi = .;
+
+        /* ============
+         * Symbol table
+         * ============ */
+
+        . = ALIGN(8);
+		symbol_table = .;
+		*(symtab.*);
+
+    }
+
+#ifdef __DEBUG__
+    .comment 0 : { *(.comment); }
+	.debug_abbrev 0 : { *(.debug_abbrev); }
+	.debug_aranges 0 : { *(.debug_aranges); }
+	.debug_info 0 : { *(.debug_info); }
+	.debug_line 0 : { *(.debug_line); }
+	.debug_loc 0 : { *(.debug_loc); }
+	.debug_pubnames 0 : { *(.debug_pubnames); }
+	.debug_pubtypes 0 : { *(.debug_pubtypes); }
+	.debug_ranges 0 : { *(.debug_ranges); }
+	.debug_str 0 : { *(.debug_str); }
+#endif
+
+    kernel_end_address = .;
+
+    /* =============================
+     * Discard the leftover sections
+     * ============================= */
+
+    /DISCARD/ : {
+		*(*);
+	}
 
 }

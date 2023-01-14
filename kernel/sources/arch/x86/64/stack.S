@@ -14,16 +14,19 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+.file "stack.S"
+.section KBSS32, "aw", @nobits
+.align 16
 
-#include <kernel/logging.h>
+#include <kernel/arch/asm.h>
 
-// C
-#include <stdint.h>
+GLOBAL_SYMBOL(stack32_bottom):
+    .skip   0x400               // 1024 bytes initial stack. Seems more than fair
+GLOBAL_SYMBOL(stack32_top):
 
-void _main64(void* mboot, uint32_t loader_magic)
-{
-    const muOS_Logger_t* logger = muOS_GetGlobalLogger();
-    muOS_Logger_Log(logger, L_INFO, "initializing kernel for x86-64 architecture.");
+.section .bss, "aw", @nobits
+.align 16
 
-    
-}
+GLOBAL_SYMBOL(stack64_bottom):
+    .skip   0x8000              // 32KiB stack size
+GLOBAL_SYMBOL(stack64_top):

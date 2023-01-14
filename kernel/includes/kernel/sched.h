@@ -34,9 +34,9 @@ extern "C"
 {
 #endif
 
-typedef struct muOS_sched_ctxt
+typedef struct muOS_SchedulingContext
 {
-} muOS_sched_ctxt_t;
+} muOS_SchedulingContext_t;
 
 #ifdef __cplusplus
 }

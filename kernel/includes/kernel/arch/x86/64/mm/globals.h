@@ -15,15 +15,46 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <kernel/logging.h>
+/* 
+ * File:   globals.h
+ * Author: Javier Marrero
+ *
+ * Created on January 14, 2023, 1:27 AM
+ */
+
+#ifndef x86_64_MM_GLOBALS_H
+#define x86_64_MM_GLOBALS_H
+
+// MACROS
+#define KERNEL_VIRTUAL_BASE     0xFFFFFFFFE0000000
+
+#ifdef __ASSEMBLER__
+
+#define VA2PA(x)    ((x) - KERNEL_VIRTUAL_BASE)
+#define PA2VA(x)    ((x) + KERNEL_VIRTUAL_BASE)
+
+#else
+
+#define VA2PA(x)    (((uintptr_t)(x)) - KERNEL_VIRTUAL_BASE)
+#define PA2VA(x)    (((uintptr_t)(x)) + KERNEL_VIRTUAL_BASE)
+
+#endif
+
+#ifndef __ASSEMBLER__
 
 // C
-#include <stdint.h>
+#include <stddef.h>
 
-void _main64(void* mboot, uint32_t loader_magic)
+#ifdef __cplusplus
+extern "C"
 {
-    const muOS_Logger_t* logger = muOS_GetGlobalLogger();
-    muOS_Logger_Log(logger, L_INFO, "initializing kernel for x86-64 architecture.");
+#endif
 
-    
+
+
+#ifdef __cplusplus
 }
+#endif
+#endif
+#endif /* GLOBALS_H */
+

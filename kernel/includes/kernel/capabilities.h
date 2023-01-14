@@ -15,15 +15,35 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <kernel/logging.h>
+/* 
+ * File:   capabilities.h
+ * Author: Javier Marrero
+ *
+ * Created on January 14, 2023, 2:53 AM
+ */
+
+#ifndef CAPABILITIES_H
+#define CAPABILITIES_H
 
 // C
+#include <stddef.h>
 #include <stdint.h>
 
-void _main64(void* mboot, uint32_t loader_magic)
+#ifdef __cplusplus
+extern "C"
 {
-    const muOS_Logger_t* logger = muOS_GetGlobalLogger();
-    muOS_Logger_Log(logger, L_INFO, "initializing kernel for x86-64 architecture.");
+#endif
 
-    
+typedef struct muOS_CapabilityObject
+{
+    uint64_t    m_uid;
+    uint32_t    m_version;
+    uint32_t    m_type;
+} muOS_CapabilityObject_t;
+
+#ifdef __cplusplus
 }
+#endif
+
+#endif /* CAPABILITIES_H */
+

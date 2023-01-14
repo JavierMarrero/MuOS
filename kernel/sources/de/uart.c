@@ -18,7 +18,7 @@
 #include <kernel/logging.h>
 #include <kernel/arch/x86/32/io.h>
 
-void muOS_logger_uart_output(const char* str)
+void muOS_LoggerUartOutput(const char* str)
 {
     while (*str)
     {

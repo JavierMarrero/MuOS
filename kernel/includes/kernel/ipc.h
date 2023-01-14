@@ -38,10 +38,10 @@ extern "C"
  * Ports are IPC rendezvous objects. They encapsulate the transmission channel over which communication between
  * processes is performed.
  */
-typedef struct muOS_ipc_port
+typedef struct muOS_IpcPort
 {
     int m_id;
-} muOS_ipc_port_t;
+} muOS_IpcPort_t;
 
 #ifdef __cplusplus
 }

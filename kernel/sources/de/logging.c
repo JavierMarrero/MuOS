@@ -18,7 +18,7 @@
 #include <kernel/logging.h>
 #include <kernel/printf.h>
 
-static const char* ml_level_to_string(muOS_log_level_t level)
+static const char* ml_level_to_string(muOS_LogLevel_t level)
 {
     switch (level)
     {
@@ -37,14 +37,14 @@ static const char* ml_level_to_string(muOS_log_level_t level)
     }
 }
 
-muOS_logger_t muOS_logger_init(const char* name, muOS_log_level_t level)
+muOS_Logger_t muOS_Logger_Init(const char* name, muOS_LogLevel_t level)
 {
-    muOS_logger_t self;
+    muOS_Logger_t self;
 
     self.m_name = name;
     self.m_level = level;
 
-    self.m_writers[0] = muOS_logger_uart_output;
+    self.m_writers[0] = muOS_LoggerUartOutput;
     for (int i = 1; i < ML_MAX_LOGGING_OUTPUTS; ++i)
     {
         self.m_writers[i] = NULL;
@@ -52,20 +52,20 @@ muOS_logger_t muOS_logger_init(const char* name, muOS_log_level_t level)
     return self;
 }
 
-bool muOS_logger_is_loggable(const muOS_logger_t * restrict self, muOS_log_level_t level)
+bool muOS_Logger_IsLoggable(const muOS_Logger_t * restrict self, muOS_LogLevel_t level)
 {
     return self->m_level >= level;
 }
 
-void muOS_logger_log_(const muOS_logger_t* self,
-                    muOS_log_level_t level,
+void muOS_Logger_Log_(const muOS_Logger_t* self,
+                    muOS_LogLevel_t level,
                     const char* file,
                     const char* func,
                     const int line,
                     const char* fmt,
                     ...)
 {
-    if (muOS_logger_is_loggable(self, level))
+    if (muOS_Logger_IsLoggable(self, level))
     {
         va_list va;
         va_start(va, fmt);
@@ -91,8 +91,8 @@ void muOS_logger_log_(const muOS_logger_t* self,
     }
 }
 
-const muOS_logger_t* ml_get_global_logger()
+const muOS_Logger_t* muOS_GetGlobalLogger()
 {
-    static muOS_logger_t m_global_logger;
+    static muOS_Logger_t m_global_logger;
     return &m_global_logger;
 }

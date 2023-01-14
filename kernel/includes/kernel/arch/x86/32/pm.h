@@ -15,15 +15,35 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <kernel/logging.h>
+/* 
+ * File:   pm.h
+ * Author: Javier Marrero
+ *
+ * Created on January 14, 2023, 1:11 AM
+ */
+
+#ifndef IA32_PROTECTED_MODE_H
+#define IA32_PROTECTED_MODE_H
 
 // C
+#include <stddef.h>
 #include <stdint.h>
 
-void _main64(void* mboot, uint32_t loader_magic)
+#ifdef __cplusplus
+extern "C"
 {
-    const muOS_Logger_t* logger = muOS_GetGlobalLogger();
-    muOS_Logger_Log(logger, L_INFO, "initializing kernel for x86-64 architecture.");
+#endif
 
+struct muOS_x86_GlobalDescriptorTableEntry
+{
     
+} __attribute__((packed));
+typedef struct muOS_x86_GlobalDescriptorTableEntry muOS_x86_GlobalDescriptorTableEntry_t;
+
+
+#ifdef __cplusplus
 }
+#endif
+
+#endif /* PM_H */
+
