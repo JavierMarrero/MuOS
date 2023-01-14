@@ -22,8 +22,8 @@
  * Created on January 12, 2023, 3:31 AM
  */
 
-#ifndef PAGE_H
-#define PAGE_H
+#ifndef x64_PAGE_H
+#define x64_PAGE_H
 #ifdef __cplusplus
 extern "C"
 {
@@ -31,6 +31,12 @@ extern "C"
 
 // ==== Paging constants ====
 #define PAGE_SIZE   0x1000u     /// The size of a page
+
+struct muOS_x86_64_pdtp
+{
+    
+} __attribute__((packed));
+typedef struct muOS_x86_64_pdtp muOS_x86_64_pdpt_t;
 
 #ifdef __cplusplus
 }

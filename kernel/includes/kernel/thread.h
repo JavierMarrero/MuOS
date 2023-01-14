@@ -15,13 +15,41 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <kernel/logging.h>
-#include <kernel/arch/x86/32/io.h>
+/* 
+ * File:   thread.h - Kernel threading API
+ * Author: Javier Marrero
+ *
+ * Created on January 12, 2023, 10:37 PM
+ */
 
-void muOS_logger_uart_output(const char* str)
+#ifndef THREAD_H
+#define THREAD_H
+
+// C
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C"
 {
-    while (*str)
-    {
-        muOS_x86_pio_o8(0x3F8u, *str++);
-    }
+#endif
+
+/**
+ * It seems rather implausible that a given process has more than 2^16 threads.
+ */
+typedef uint16_t tid_t;
+
+/**
+ * The thread control block structure holds all the information related to threads.
+ */
+typedef struct muOS_tcb
+{
+    uintptr_t   m_stack;    /// The stack address
+    tid_t       m_tid;      /// The thread ID
+} muOS_tcb_t;
+
+#ifdef __cplusplus
 }
+#endif
+
+#endif /* THREAD_H */
+

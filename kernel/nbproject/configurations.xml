@@ -4,11 +4,17 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>includes/kernel/arch/x86/64/boot.h</itemPath>
+      <itemPath>includes/kernel/arch/detect.h</itemPath>
       <itemPath>includes/kernel/arch/x86/32/io.h</itemPath>
+      <itemPath>includes/kernel/ipc.h</itemPath>
       <itemPath>includes/kernel/libc.h</itemPath>
       <itemPath>includes/kernel/logging.h</itemPath>
       <itemPath>includes/kernel/arch/x86/x64/mm/page.h</itemPath>
+      <itemPath>includes/kernel/arch/x86/32/mm/page.h</itemPath>
       <itemPath>includes/kernel/printf.h</itemPath>
+      <itemPath>includes/kernel/sched.h</itemPath>
+      <itemPath>includes/kernel/thread.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -37,6 +43,7 @@
     </logicalFolder>
     <itemPath>.gitignore</itemPath>
     <itemPath>configure.sh</itemPath>
+    <itemPath>linker/x86/64/link.ld.in</itemPath>
     <itemPath>sources/arch/x86/64/multiboot.S</itemPath>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
@@ -58,9 +65,10 @@
         <asmTool>
           <commandlineTool>x86_64-elf-gcc</commandlineTool>
           <warningLevel>2</warningLevel>
-          <commandLine>-ffreestanding -nostdlib</commandLine>
+          <commandLine>-ffreestanding -nostdlib -c</commandLine>
         </asmTool>
         <linkerTool>
+          <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/kernel</output>
           <commandLine>-ffreestanding -nostdlib -lgcc</commandLine>
         </linkerTool>
       </compileType>
@@ -68,18 +76,35 @@
       </item>
       <item path="configure.sh" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="includes/kernel/arch/detect.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="includes/kernel/arch/x86/32/io.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="includes/kernel/arch/x86/32/mm/page.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="includes/kernel/arch/x86/64/boot.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="includes/kernel/arch/x86/x64/mm/page.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
+      <item path="includes/kernel/ipc.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="includes/kernel/libc.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="includes/kernel/logging.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="includes/kernel/printf.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="includes/kernel/sched.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="includes/kernel/thread.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="linker/x86/64/link.ld.in" ex="false" tool="3" flavor2="0">
       </item>
       <item path="sources/arch/x86/64/main.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -121,9 +146,10 @@
           <developmentMode>5</developmentMode>
           <commandlineTool>x86_64-elf-gcc</commandlineTool>
           <warningLevel>2</warningLevel>
-          <commandLine>-ffreestanding -nostdlib</commandLine>
+          <commandLine>-ffreestanding -nostdlib -c</commandLine>
         </asmTool>
         <linkerTool>
+          <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/kernel</output>
           <commandLine>-ffreestanding -nostdlib -lgcc</commandLine>
         </linkerTool>
       </compileType>
@@ -131,18 +157,35 @@
       </item>
       <item path="configure.sh" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="includes/kernel/arch/detect.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="includes/kernel/arch/x86/32/io.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="includes/kernel/arch/x86/32/mm/page.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="includes/kernel/arch/x86/64/boot.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="includes/kernel/arch/x86/x64/mm/page.h"
             ex="false"
             tool="3"
             flavor2="0">
       </item>
+      <item path="includes/kernel/ipc.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="includes/kernel/libc.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="includes/kernel/logging.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="includes/kernel/printf.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="includes/kernel/sched.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="includes/kernel/thread.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="linker/x86/64/link.ld.in" ex="false" tool="3" flavor2="0">
       </item>
       <item path="sources/arch/x86/64/main.c" ex="false" tool="0" flavor2="0">
       </item>

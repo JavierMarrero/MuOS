@@ -41,7 +41,7 @@ typedef uint16_t ioport_t;
  * @param port
  * @param byte
  */
-static inline void ml_ia32_pio_o8(ioport_t port, uint8_t byte)
+static inline void muOS_x86_pio_o8(ioport_t port, uint8_t byte)
 {
     __asm__ __volatile__ ("outb %0, %1" : : "a"(byte), "Nd"(port));
 }

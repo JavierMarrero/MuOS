@@ -15,13 +15,23 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <kernel/logging.h>
-#include <kernel/arch/x86/32/io.h>
+/* 
+ * File:   detect.h
+ * Author: Javier Marrero
+ *
+ * Created on January 13, 2023, 10:16 PM
+ */
 
-void muOS_logger_uart_output(const char* str)
-{
-    while (*str)
-    {
-        muOS_x86_pio_o8(0x3F8u, *str++);
-    }
-}
+#ifndef ARCH_DETECT_H
+#define ARCH_DETECT_H
+
+#if defined(__x86_64__) || defined(_x86_64) || defined(x86_64)
+#   define MEL_TARGET_AMD64
+#elif defined (__x86__) || defined(__ia32__)
+#   define MEL_TARGET_IA32
+#else
+#error "Your system is not configured for the target architecture. Please, fix before it starts destroying the world.F"
+#endif
+
+#endif /* DETECT_H */
+

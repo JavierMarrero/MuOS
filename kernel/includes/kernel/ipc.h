@@ -15,13 +15,37 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <kernel/logging.h>
-#include <kernel/arch/x86/32/io.h>
+/* 
+ * File:   ipc.h
+ * Author: Javier Marrero
+ *
+ * Created on January 12, 2023, 11:16 PM
+ */
 
-void muOS_logger_uart_output(const char* str)
+#ifndef IPC_H
+#define IPC_H
+
+// C
+#include <stddef.h>
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C"
 {
-    while (*str)
-    {
-        muOS_x86_pio_o8(0x3F8u, *str++);
-    }
+#endif
+
+/**
+ * Ports are IPC rendezvous objects. They encapsulate the transmission channel over which communication between
+ * processes is performed.
+ */
+typedef struct muOS_ipc_port
+{
+    int m_id;
+} muOS_ipc_port_t;
+
+#ifdef __cplusplus
 }
+#endif
+
+#endif /* IPC_H */
+

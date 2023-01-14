@@ -15,13 +15,24 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <kernel/logging.h>
-#include <kernel/arch/x86/32/io.h>
+/* 
+ * File:   boot.h
+ * Author: Javier Marrero
+ *
+ * Created on January 12, 2023, 10:36 PM
+ */
 
-void muOS_logger_uart_output(const char* str)
+#ifndef BOOT_H
+#define BOOT_H
+#ifdef __cplusplus
+extern "C"
 {
-    while (*str)
-    {
-        muOS_x86_pio_o8(0x3F8u, *str++);
-    }
+#endif
+
+#define BOOT_OFFSET 0x100000    // 1MiB is the offset of the text section
+
+#ifdef __cplusplus
 }
+#endif
+#endif /* BOOT_H */
+

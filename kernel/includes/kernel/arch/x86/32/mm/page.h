@@ -15,13 +15,27 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <kernel/logging.h>
-#include <kernel/arch/x86/32/io.h>
+/* 
+ * File:   page.h
+ * Author: Javier Marrero
+ *
+ * Created on January 13, 2023, 10:16 PM
+ */
 
-void muOS_logger_uart_output(const char* str)
+#ifndef x86_PAGE_H
+#define x86_PAGE_H
+
+#ifdef __cplusplus
+extern "C"
 {
-    while (*str)
-    {
-        muOS_x86_pio_o8(0x3F8u, *str++);
-    }
+#endif
+
+
+
+
+#ifdef __cplusplus
 }
+#endif
+
+#endif /* PAGE_H */
+
