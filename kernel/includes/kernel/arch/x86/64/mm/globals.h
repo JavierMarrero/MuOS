@@ -26,7 +26,7 @@
 #define x86_64_MM_GLOBALS_H
 
 // MACROS
-#define KERNEL_VIRTUAL_BASE     0xFFFFFFFFE0000000
+#define KERNEL_VIRTUAL_BASE     0xFFFFFFFFC0000000
 
 #ifdef __ASSEMBLER__
 
@@ -34,6 +34,9 @@
 #define PA2VA(x)    ((x) + KERNEL_VIRTUAL_BASE)
 
 #else
+
+// C
+#include <stdint.h>
 
 #define VA2PA(x)    (((uintptr_t)(x)) - KERNEL_VIRTUAL_BASE)
 #define PA2VA(x)    (((uintptr_t)(x)) + KERNEL_VIRTUAL_BASE)

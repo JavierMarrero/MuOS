@@ -14,28 +14,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-.file "print.S"
-.section KTEXT32, "ax", @progbits
-.align 4
-.code32
 
-#include <kernel/arch/asm.h>
+#include <kernel/arch/x86/64/mm/globals.h>
+#include <kernel/arch/x86/64/mm/page.h>
 
-FUNCTION(_puts32):
-    pusha
+//
+// This file contains the global variables that compose the initial address space.
+// Please, do not modify the alignment of the following structures, nor its compositions, or bad things will happen.
+// You may get haunted, for instance.
+//
 
-1:
-    lodsb               // Character to %al
+extern muOS_x86_64_PageDirectoryTableEntry_t           ptl_2[512];
+extern muOS_x86_64_PageDirectoryPointerTableEntry_t    ptl_1[512];
+extern muOS_x86_64_PageMapLevel4Entry_t                ptl_0[512];
 
-    orb     %al, %al
-    jz      .done
-
-    mov     $0x3F8, %dx
-    outb    %al, %dx
-
-    jmp 1b
-
-.done:
-    popa
-    ret
-
+void muOS_x86_64_TlbShutdown()
+{
+    __asm__ __volatile__ ("movq %cr3, %rax; movq %rax, %cr3");
+}

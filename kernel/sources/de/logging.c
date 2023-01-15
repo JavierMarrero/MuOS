@@ -18,7 +18,7 @@
 #include <kernel/logging.h>
 #include <kernel/printf.h>
 
-static const char* ml_level_to_string(muOS_LogLevel_t level)
+const char* ml_level_to_string(muOS_LogLevel_t level)
 {
     switch (level)
     {
@@ -33,7 +33,7 @@ static const char* ml_level_to_string(muOS_LogLevel_t level)
     case L_WARNING:
         return "WARNING";
     default:
-        return "x";
+        return "?";
     }
 }
 
@@ -54,7 +54,7 @@ muOS_Logger_t muOS_Logger_Init(const char* name, muOS_LogLevel_t level)
 
 bool muOS_Logger_IsLoggable(const muOS_Logger_t * restrict self, muOS_LogLevel_t level)
 {
-    return self->m_level >= level;
+    return self->m_level <= level;
 }
 
 void muOS_Logger_Log_(const muOS_Logger_t* self,
@@ -70,20 +70,21 @@ void muOS_Logger_Log_(const muOS_Logger_t* self,
         va_list va;
         va_start(va, fmt);
 
-        char buffer[0x4000] = {0};
-        size_t addendum = sprintf(buffer, "[%s] (%s) <%s> (%s : %d): ",
+        char buffer[0x1000];
+        size_t addendum = sprintf(buffer, "[%s] (%s) <%s> (%s : %d):\r\n  ",
                                   ml_level_to_string(level),
                                   self->m_name,
                                   file,
                                   func,
                                   line);
-        vsnprintf(buffer + addendum, 0x4000, fmt, va);
+        vsnprintf(buffer + addendum, 0x1000, fmt, va);
 
         for (int i = 0; i < ML_MAX_LOGGING_OUTPUTS; ++i)
         {
             if (self->m_writers[i] != NULL)
             {
                 self->m_writers[i](buffer);
+                self->m_writers[i]("\r\n");
             }
         }
 
@@ -94,5 +95,12 @@ void muOS_Logger_Log_(const muOS_Logger_t* self,
 const muOS_Logger_t* muOS_GetGlobalLogger()
 {
     static muOS_Logger_t m_global_logger;
+    static bool initialized = false;
+    
+    if (!initialized)
+    {
+        m_global_logger = muOS_Logger_Init("global", L_ALL);
+        initialized = true;
+    }
     return &m_global_logger;
 }

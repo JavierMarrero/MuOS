@@ -7,6 +7,8 @@
       <itemPath>includes/kernel/arch/asm.h</itemPath>
       <itemPath>includes/kernel/arch/x86/64/boot.h</itemPath>
       <itemPath>includes/kernel/capabilities.h</itemPath>
+      <itemPath>includes/kernel/arch/x86/64/cpu.h</itemPath>
+      <itemPath>includes/kernel/arch/x86/32/cpuid.h</itemPath>
       <itemPath>includes/kernel/arch/detect.h</itemPath>
       <itemPath>includes/kernel/arch/x86/64/mm/globals.h</itemPath>
       <itemPath>includes/kernel/arch/x86/32/io.h</itemPath>
@@ -29,6 +31,8 @@
       <itemPath>sources/de/logging.c</itemPath>
       <itemPath>sources/arch/x86/64/main.c</itemPath>
       <itemPath>sources/c/memset.c</itemPath>
+      <itemPath>sources/arch/x86/64/mm/pagetables.c</itemPath>
+      <itemPath>sources/arch/x86/32/pm.c</itemPath>
       <itemPath>sources/c/printf.c</itemPath>
       <itemPath>sources/c/strlen.c</itemPath>
       <itemPath>sources/de/uart.c</itemPath>
@@ -45,13 +49,14 @@
       <itemPath>Makefile</itemPath>
     </logicalFolder>
     <itemPath>.gitignore</itemPath>
+    <itemPath>sources/arch/x86/64/mm/address-space.S</itemPath>
     <itemPath>configure.sh</itemPath>
     <itemPath>linker/x86/64/link.ld.in</itemPath>
-    <itemPath>sources/arch/x86/64/multiboot.S</itemPath>
-    <itemPath>sources/arch/x86/mm/pagetables.S</itemPath>
-    <itemPath>sources/arch/x86/64/print.S</itemPath>
-    <itemPath>sources/arch/x86/64/stack.S</itemPath>
-    <itemPath>sources/arch/x86/64/start.S</itemPath>
+    <itemPath>sources/arch/x86/64/boot/multiboot.S</itemPath>
+    <itemPath>sources/arch/x86/64/boot/print.S</itemPath>
+    <itemPath>sources/arch/x86/64/boot/stack.S</itemPath>
+    <itemPath>sources/arch/x86/64/boot/start.S</itemPath>
+    <itemPath>sources/arch/x86/64/boot/vspace.S</itemPath>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -63,6 +68,7 @@
       </toolsSet>
       <compileType>
         <cTool>
+          <standard>3</standard>
           <incDir>
             <pElem>includes/kernel/arch/x86/64</pElem>
             <pElem>includes</pElem>
@@ -88,6 +94,11 @@
       </item>
       <item path="includes/kernel/arch/detect.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="includes/kernel/arch/x86/32/cpuid.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="includes/kernel/arch/x86/32/io.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="includes/kernel/arch/x86/32/mm/page.h"
@@ -98,6 +109,8 @@
       <item path="includes/kernel/arch/x86/32/pm.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="includes/kernel/arch/x86/64/boot.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="includes/kernel/arch/x86/64/cpu.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="includes/kernel/arch/x86/64/mm/globals.h"
             ex="false"
@@ -120,17 +133,32 @@
       </item>
       <item path="linker/x86/64/link.ld.in" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="sources/arch/x86/32/pm.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="sources/arch/x86/64/boot/multiboot.S"
+            ex="false"
+            tool="4"
+            flavor2="0">
+      </item>
+      <item path="sources/arch/x86/64/boot/print.S" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="sources/arch/x86/64/boot/stack.S" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="sources/arch/x86/64/boot/start.S" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="sources/arch/x86/64/boot/vspace.S" ex="false" tool="4" flavor2="0">
+      </item>
       <item path="sources/arch/x86/64/main.c" ex="false" tool="0" flavor2="0">
       </item>
-      <item path="sources/arch/x86/64/multiboot.S" ex="false" tool="4" flavor2="0">
+      <item path="sources/arch/x86/64/mm/address-space.S"
+            ex="false"
+            tool="4"
+            flavor2="0">
       </item>
-      <item path="sources/arch/x86/64/print.S" ex="false" tool="4" flavor2="0">
-      </item>
-      <item path="sources/arch/x86/64/stack.S" ex="false" tool="4" flavor2="0">
-      </item>
-      <item path="sources/arch/x86/64/start.S" ex="false" tool="4" flavor2="0">
-      </item>
-      <item path="sources/arch/x86/mm/pagetables.S" ex="false" tool="4" flavor2="0">
+      <item path="sources/arch/x86/64/mm/pagetables.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
       </item>
       <item path="sources/c/memset.c" ex="false" tool="0" flavor2="0">
       </item>
@@ -152,6 +180,7 @@
       <compileType>
         <cTool>
           <developmentMode>6</developmentMode>
+          <standard>3</standard>
           <incDir>
             <pElem>includes/kernel/arch/x86/64</pElem>
             <pElem>includes</pElem>
@@ -184,6 +213,11 @@
       </item>
       <item path="includes/kernel/arch/detect.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="includes/kernel/arch/x86/32/cpuid.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
       <item path="includes/kernel/arch/x86/32/io.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="includes/kernel/arch/x86/32/mm/page.h"
@@ -194,6 +228,8 @@
       <item path="includes/kernel/arch/x86/32/pm.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="includes/kernel/arch/x86/64/boot.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="includes/kernel/arch/x86/64/cpu.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="includes/kernel/arch/x86/64/mm/globals.h"
             ex="false"
@@ -216,17 +252,32 @@
       </item>
       <item path="linker/x86/64/link.ld.in" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="sources/arch/x86/32/pm.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="sources/arch/x86/64/boot/multiboot.S"
+            ex="false"
+            tool="4"
+            flavor2="0">
+      </item>
+      <item path="sources/arch/x86/64/boot/print.S" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="sources/arch/x86/64/boot/stack.S" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="sources/arch/x86/64/boot/start.S" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="sources/arch/x86/64/boot/vspace.S" ex="false" tool="4" flavor2="0">
+      </item>
       <item path="sources/arch/x86/64/main.c" ex="false" tool="0" flavor2="0">
       </item>
-      <item path="sources/arch/x86/64/multiboot.S" ex="false" tool="4" flavor2="0">
+      <item path="sources/arch/x86/64/mm/address-space.S"
+            ex="false"
+            tool="4"
+            flavor2="0">
       </item>
-      <item path="sources/arch/x86/64/print.S" ex="false" tool="4" flavor2="0">
-      </item>
-      <item path="sources/arch/x86/64/stack.S" ex="false" tool="4" flavor2="0">
-      </item>
-      <item path="sources/arch/x86/64/start.S" ex="false" tool="4" flavor2="0">
-      </item>
-      <item path="sources/arch/x86/mm/pagetables.S" ex="false" tool="4" flavor2="0">
+      <item path="sources/arch/x86/64/mm/pagetables.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
       </item>
       <item path="sources/c/memset.c" ex="false" tool="0" flavor2="0">
       </item>

@@ -14,36 +14,27 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-.file "start.S"
+.file "print.S"
 .section KTEXT32, "ax", @progbits
 .align 4
 .code32
 
 #include <kernel/arch/asm.h>
 
-.macro print msg
-    movl    \msg, %esi
-    call    _puts32
-.endm
+FUNCTION(_puts32):
+    pusha
 
-FUNCTION(multiboot_entry_point):
+    mov     $0x3F8, %dx
 
-    // Set up the initial stack
-    movl    $stack32_top, %esp
+1:
+    lodsb               // Character to %al
+    orb     %al, %al
+    jz      .done
 
-    // Print the initial status
-    print   $status_begin
+    outb    %al, %dx
+    jmp 1b
 
-    // Halt the kernel. Reaching this statement indicates a boot failure.
-    // So, we probably would have to print an error message.
-.epilogue:
-    hlt
-    jmp .epilogue
+.done:
+    popa
+    ret
 
-// ==================
-//      MESSAGES
-// ==================
-
-err_no_cpuid: .string "Error: Hardware does not supports CPUID instruction."
-
-status_begin: .string "[x86_64] Loading kernel..."

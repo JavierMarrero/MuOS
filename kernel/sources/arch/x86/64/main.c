@@ -25,5 +25,4 @@ void _main64(void* mboot, uint32_t loader_magic)
     const muOS_Logger_t* logger = muOS_GetGlobalLogger();
     muOS_Logger_Log(logger, L_INFO, "initializing kernel for x86-64 architecture.");
 
-    
 }
